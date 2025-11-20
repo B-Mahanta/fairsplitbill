@@ -1,0 +1,36 @@
+{
+  "name": "FairSplit - Fair Bill Splitting",
+  "short_name": "FairSplit",
+  "description": "Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants and group dinners.",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6460F4",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "utilities", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Bill",
+      "short_name": "New Bill",
+      "description": "Start splitting a new bill",
+      "url": "/"
+    }
+  ]
+}

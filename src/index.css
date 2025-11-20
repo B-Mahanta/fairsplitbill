@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Cabinet Grotesk Font loaded from Google Fonts above */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent horizontal scrolling on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  position: relative;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  max-width: 100%;
+}
+
+/* Purple Heart Color Palette */
+@layer base {
+  :root {
+    /* Background colors - Light purple tones */
+    --background: 252 100% 97%; /* Very light purple #EEF1FF */
+    --foreground: 249 47% 12%; /* Dark purple #201A4C */
+    
+    /* Card colors */
+    --card: 250 100% 98%; /* Slightly purple white #F8F9FF */
+    --card-foreground: 249 47% 12%; /* Dark purple text */
+    
+    /* Popover colors */
+    --popover: 250 100% 98%;
+    --popover-foreground: 249 47% 12%;
+    
+    /* Primary colors - Main purple (#6460F4) */
+    --primary: 242 89% 67%; /* #6460F4 */
+    --primary-foreground: 0 0% 100%; /* White text on purple */
+    
+    /* Secondary colors - Light purple */
+    --secondary: 248 100% 88%; /* Light purple #DFE5FF */
+    --secondary-foreground: 249 47% 12%; /* Dark purple text */
+    
+    /* Muted colors - Medium purple tones */
+    --muted: 246 67% 91%; /* Very light purple #E8ECFF */
+    --muted-foreground: 245 25% 57%; /* Medium purple #8B8FA3 */
+    
+    /* Accent colors - Vibrant purple */
+    --accent: 244 75% 57%; /* Accent purple #4835CD */
+    --accent-foreground: 0 0% 100%; /* White text */
+    
+    /* Destructive colors - Keep red but with purple undertones */
+    --destructive: 0 84% 60%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+    
+    /* Border and input colors */
+    --border: 248 39% 88%; /* Light purple border #D1D9E8 */
+    --input: 248 39% 88%; /* Light purple input background */
+    --ring: 242 89% 67%; /* Purple focus ring */
+    
+    --radius: 0.75rem;
+  }
+}
+
+/* Typography */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply antialiased bg-background text-foreground;
+    font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+/* Mobile optimizations */
+@layer utilities {
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-pt {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-pl {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-pr {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Touch-friendly tap targets */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent text selection on buttons */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Smooth scrolling for mobile */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground));
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--foreground));
+  }
+}
+
+/* Focus styles for accessibility */
+@layer base {
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+/* Basic utilities */
+@layer utilities {
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
