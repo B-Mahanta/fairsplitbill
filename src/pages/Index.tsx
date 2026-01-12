@@ -146,7 +146,7 @@ const Index = () => {
                 onRemoveParticipant={removeParticipant}
               />
 
-              <div className="border border-border/50 rounded-xl bg-white shadow-sm overflow-hidden">
+              <div className="border border-border/60 rounded-xl bg-white shadow-md overflow-hidden">
                 <AddItemForm participants={participants} onAddItem={addItem} currency={currency} />
               </div>
             </div>
@@ -154,7 +154,7 @@ const Index = () => {
             {/* Right Column - Items & Summary */}
             <div className="lg:col-span-8 space-y-6">
               {(items.length > 0) && (
-                <div className="rounded-xl border border-border/50 bg-white shadow-sm overflow-hidden min-h-[200px]">
+                <div className="rounded-xl border border-border/60 bg-white shadow-md overflow-hidden min-h-[200px]">
                   <ItemList
                     items={items}
                     participants={participants}
@@ -183,7 +183,7 @@ const Index = () => {
         <footer className="border-t border-border/40 bg-white/50 py-12">
           <div className="max-w-5xl mx-auto px-4 text-center">
             <p className="text-sm text-muted-foreground">
-              FairSplit &copy; {new Date().getFullYear()} &middot; Crafted with precision.
+              FairSplit &copy; {new Date().getFullYear()} &middot; Crafted with precision &middot; <a href="mailto:ritamf9@gmail.com" className="hover:text-primary transition-colors">ritamf9@gmail.com</a>
             </p>
           </div>
         </footer>

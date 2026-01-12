@@ -135,7 +135,7 @@ export const SettlementSummary = memo(({ items, participants, currency, formatCu
 
   if (participants.length === 0 || items.length === 0) {
     return (
-      <div className="bg-neutral-50 rounded-xl border border-dashed border-border/60 p-8 text-center">
+      <div className="bg-white rounded-xl border border-border/60 shadow-sm p-8 text-center">
         <Calculator className="h-8 w-8 text-neutral-300 mx-auto mb-3" />
         <h3 className="text-sm font-semibold text-neutral-900">Settlement</h3>
         <p className="text-xs text-muted-foreground mt-1">Calculations will appear here</p>
@@ -146,7 +146,7 @@ export const SettlementSummary = memo(({ items, participants, currency, formatCu
   const hasPayments = paymentAdjustments.length > 0;
 
   return (
-    <div className="bg-white rounded-xl shadow-xl shadow-neutral-100 border border-border/50 overflow-hidden animate-fade-in">
+    <div className="bg-white rounded-xl shadow-xl shadow-neutral-200/50 border border-border/60 overflow-hidden animate-fade-in">
       <div className="p-6 pb-0">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-base font-bold text-primary">Settlement</h2>
