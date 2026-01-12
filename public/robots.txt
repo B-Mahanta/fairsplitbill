@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /*.json$
 
 Sitemap: https://fairsplitbill.netlify.app/sitemap.xml
