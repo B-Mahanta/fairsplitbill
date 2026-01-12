@@ -4,6 +4,12 @@
   command = "npm run build"
   publish = "dist"
 
+# Allow sitemap.xml to be served directly (CRITICAL)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
 # SPA fallback - redirect all routes to index.html
 [[redirects]]
   from = "/*"
@@ -19,7 +25,7 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    
+
 # Cache static assets
 [[headers]]
   for = "/assets/*"
@@ -39,7 +45,7 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# Environment variables (optional)
+# Environment variables
 [context.production.environment]
   VITE_APP_ENV = "production"
 
