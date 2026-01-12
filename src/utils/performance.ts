@@ -36,7 +36,7 @@ export const logPerformanceMetrics = () => {
   if (import.meta.env.DEV) {
     // Navigation Timing API
     const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-    
+
     if (perfData) {
       console.group('⚡ Performance Metrics');
       console.log('DNS Lookup:', Math.round(perfData.domainLookupEnd - perfData.domainLookupStart), 'ms');
@@ -51,10 +51,12 @@ export const logPerformanceMetrics = () => {
 
     // Resource Timing API
     const resources = performance.getEntriesByType('resource');
-    const totalSize = resources.reduce((acc, resource: any) => {
-      return acc + (resource.transferSize || 0);
+    const totalSize = resources.reduce((acc, resource) => {
+      // Cast resource to PerformanceResourceTiming to access transferSize
+      const r = resource as PerformanceResourceTiming;
+      return acc + (r.transferSize || 0);
     }, 0);
-    
+
     console.log('📦 Total Resources:', resources.length);
     console.log('📊 Total Transfer Size:', (totalSize / 1024).toFixed(2), 'KB');
   }
@@ -67,30 +69,41 @@ export const measureRender = (componentName: string, callback: () => void) => {
   const start = performance.now();
   callback();
   const end = performance.now();
-  
+
   if (import.meta.env.DEV) {
     console.log(`🎨 ${componentName} render time:`, (end - start).toFixed(2), 'ms');
   }
 };
 
+interface NetworkInformation extends EventTarget {
+  effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
+  saveData: boolean;
+}
+
 /**
  * Check if the app is running on a slow connection
  */
 export const isSlowConnection = (): boolean => {
-  const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-  
+  const connection = (navigator as unknown as {
+    connection?: NetworkInformation;
+    mozConnection?: NetworkInformation;
+    webkitConnection?: NetworkInformation;
+  }).connection ||
+    (navigator as unknown as { mozConnection?: NetworkInformation }).mozConnection ||
+    (navigator as unknown as { webkitConnection?: NetworkInformation }).webkitConnection;
+
   if (connection) {
     // Check for 2G or slow-2g
     if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
       return true;
     }
-    
+
     // Check for save-data mode
     if (connection.saveData) {
       return true;
     }
   }
-  
+
   return false;
 };
 
@@ -98,22 +111,18 @@ export const isSlowConnection = (): boolean => {
  * Preload critical resources
  */
 export const preloadCriticalResources = () => {
-  // Preload fonts
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'preload';
-  fontLink.as = 'font';
-  fontLink.type = 'font/woff2';
-  fontLink.crossOrigin = 'anonymous';
-  fontLink.href = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2';
-  document.head.appendChild(fontLink);
+  // Manual font preloading removed to avoid "unused resource" warnings.
+  // Fonts are handled via CSS imports in index.css
 };
 
 /**
  * Lazy load images with Intersection Observer
  */
 export const lazyLoadImages = () => {
+  if (typeof window === 'undefined') return;
+
   const images = document.querySelectorAll('img[data-src]');
-  
+
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -125,7 +134,7 @@ export const lazyLoadImages = () => {
         }
       });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
   } else {
     // Fallback for browsers without Intersection Observer
@@ -140,6 +149,10 @@ export const lazyLoadImages = () => {
  * Get device information for debugging
  */
 export const getDeviceInfo = () => {
+  const nav = navigator as unknown as {
+    connection?: NetworkInformation;
+  };
+
   return {
     userAgent: navigator.userAgent,
     platform: navigator.platform,
@@ -152,7 +165,7 @@ export const getDeviceInfo = () => {
     viewportHeight: window.innerHeight,
     devicePixelRatio: window.devicePixelRatio,
     touchSupport: 'ontouchstart' in window,
-    connection: (navigator as any).connection?.effectiveType || 'unknown',
+    connection: nav.connection?.effectiveType || 'unknown',
   };
 };
 
@@ -161,7 +174,7 @@ export const getDeviceInfo = () => {
  */
 export const monitorMemory = () => {
   if (import.meta.env.DEV && 'memory' in performance) {
-    const memory = (performance as any).memory;
+    const memory = (performance as unknown as { memory: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
     console.group('💾 Memory Usage');
     console.log('Used:', (memory.usedJSHeapSize / 1048576).toFixed(2), 'MB');
     console.log('Total:', (memory.totalJSHeapSize / 1048576).toFixed(2), 'MB');

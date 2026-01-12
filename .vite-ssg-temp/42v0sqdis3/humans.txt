@@ -1,6 +1,6 @@
 /* TEAM */
 Developer: FairSplit Team
-Site: https://fairsplitbill.netlify.app
+Site: https://fairsplit.app
 Location: Global
 
 /* THANKS */

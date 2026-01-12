@@ -7,7 +7,7 @@ const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/favicon.svg',
+  '/favicon.ico',
 ];
 
 // Install event - cache essential assets
@@ -114,7 +114,7 @@ self.addEventListener('push', (event) => {
     badge: '/icon-192.png',
     vibrate: [200, 100, 200],
   };
-
+  
   event.waitUntil(
     self.registration.showNotification('FairSplit', options)
   );

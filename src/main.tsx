@@ -1,27 +1,40 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { App } from "./App.tsx";
 import "./index.css";
 import { logPerformanceMetrics, preloadCriticalResources, getDeviceInfo } from "./utils/performance";
+import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter } from "react-router-dom";
 
-// Preload critical resources
-preloadCriticalResources();
-
-// Log device info in development
+// Initialize performance monitoring
 if (import.meta.env.DEV) {
-  console.log('📱 Device Info:', getDeviceInfo());
-}
-
-// Render app
-createRoot(document.getElementById("root")!).render(<App />);
-
-// Log performance metrics after load
-if (import.meta.env.DEV) {
+  // Only run in development to avoid console noise in production
   window.addEventListener('load', () => {
     setTimeout(() => {
       logPerformanceMetrics();
+      const info = getDeviceInfo();
+      console.log('Device Info:', info);
     }, 0);
   });
 }
+
+// Preload critical resources
+// We wrap this in a check for window to ensure it doesn't run during build if we ever move back to SSG tools
+if (typeof window !== 'undefined') {
+  preloadCriticalResources();
+}
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <HelmetProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </HelmetProvider>
+  </React.StrictMode>
+);
+
+
 
 // Register service worker in production
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -30,7 +43,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
       .register('/sw.js')
       .then((registration) => {
         console.log('✅ Service Worker registered:', registration.scope);
-        
+
         // Check for updates
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;

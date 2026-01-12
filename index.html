@@ -1,102 +1,114 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    
-    <!-- Enhanced Mobile Viewport Configuration -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
-    
-    <!-- Google Site Verification -->
-    <meta name="google-site-verification" content="DDL-kjhWsRLQwqUSZlq1U3Is6DUAtjx77Wu7MjT6IcU" />
-    
-    <!-- Primary Meta Tags -->
-    <title>FairSplit - Fair Bill Splitting Calculator | Split Bills Based on Consumption</title>
-    <meta name="title" content="FairSplit - Fair Bill Splitting Calculator | Split Bills Based on Consumption" />
-    <meta name="description" content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants, group dinners, and shared expenses. No signup required." />
-    <meta name="author" content="FairSplit" />
-    <meta name="keywords" content="bill splitting calculator, fair split, expense sharing, bill splitter app, group expenses, restaurant bill calculator, split check, divide bill, shared expenses calculator, proportional bill split, free bill splitter" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://fairsplit.app/" />
-    
-    <!-- Language and Region -->
-    <meta name="language" content="English" />
-    <meta name="geo.region" content="US" />
-    <meta name="geo.placename" content="United States" />
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="bingbot" content="index, follow" />
-    <meta name="rating" content="general" />
-    <meta name="distribution" content="global" />
-    <meta name="revisit-after" content="7 days" />
-    
-    <!-- Humans.txt -->
-    <link rel="author" href="/humans.txt" />
-    
-    <!-- Theme Colors for Mobile Browsers -->
-    <meta name="theme-color" content="#6460F4" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#4835CD" media="(prefers-color-scheme: dark)" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="FairSplit" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json" fetchpriority="low" />
-    
-    <!-- Favicon - Add your own icon here -->
-    <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico" /> -->
-    <!-- <link rel="apple-touch-icon" href="/icon-192.png" /> -->
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fairsplit.app/" />
-    <meta property="og:title" content="FairSplit - Fair Bill Splitting Calculator" />
-    <meta property="og:description" content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants and group dinners." />
-    <meta property="og:image" content="https://fairsplit.app/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="FairSplit - Fair Bill Splitting Calculator" />
-    <meta property="og:site_name" content="FairSplit" />
-    <meta property="og:locale" content="en_US" />
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/src/main.tsx" as="script" fetchpriority="high" />
-    <link rel="preload" href="/src/index.css" as="style" fetchpriority="high" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://fairsplit.app/" />
-    <meta name="twitter:title" content="FairSplit - Fair Bill Splitting Calculator" />
-    <meta name="twitter:description" content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants and group dinners." />
-    <meta name="twitter:image" content="https://fairsplit.app/og-image.png" />
-    <meta name="twitter:image:alt" content="FairSplit - Fair Bill Splitting Calculator" />
-    <meta name="twitter:creator" content="@fairsplit" />
-    
-    <!-- Preconnect to improve performance with priority hints -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin fetchpriority="high" />
-    
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://cdnjs.buymeacoffee.com" fetchpriority="low" />
-    
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    
-    <!-- Structured Data / JSON-LD -->
-    <script type="application/ld+json">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Enhanced Mobile Viewport Configuration -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="DDL-kjhWsRLQwqUSZlq1U3Is6DUAtjx77Wu7MjT6IcU" />
+
+  <!-- Primary Meta Tags -->
+  <title>FairSplit - Fair Bill Splitting Calculator | Split Bills Based on Consumption</title>
+  <meta name="title" content="FairSplit - Fair Bill Splitting Calculator | Split Bills Based on Consumption" />
+  <meta name="description"
+    content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants, group dinners, and shared expenses. No signup required." />
+  <meta name="author" content="FairSplit" />
+  <meta name="keywords"
+    content="bill splitting calculator, fair split, expense sharing, bill splitter app, group expenses, restaurant bill calculator, itemize receipt, split check, divide bill, shared expenses calculator, proportional bill split, free bill splitter, receipt splitter, bill divider, group dinner calculator" />
+
+  <!-- Canonical URL managed by React Helmet -->
+
+
+  <!-- Language and Region -->
+  <meta name="language" content="English" />
+  <meta name="geo.region" content="US" />
+  <meta name="geo.placename" content="United States" />
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="rating" content="general" />
+  <meta name="distribution" content="global" />
+  <meta name="revisit-after" content="7 days" />
+
+  <!-- Humans.txt -->
+  <link rel="author" href="/humans.txt" />
+
+  <!-- Theme Colors for Mobile Browsers -->
+  <meta name="theme-color" content="#6460F4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#4835CD" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="FairSplit" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" fetchpriority="low" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- <link rel="apple-touch-icon" href="/icon-192.png" /> -->
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fairsplitbill.netlify.app/" />
+  <meta property="og:title" content="FairSplit - Fair Bill Splitting Calculator" />
+  <meta property="og:description"
+    content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants and group dinners." />
+  <meta property="og:image" content="https://fairsplitbill.netlify.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="FairSplit - Fair Bill Splitting Calculator" />
+  <meta property="og:site_name" content="FairSplit" />
+  <meta property="og:locale" content="en_US" />
+
+
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://fairsplitbill.netlify.app/" />
+  <meta name="twitter:title" content="FairSplit - Fair Bill Splitting Calculator" />
+  <meta name="twitter:description"
+    content="Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants and group dinners." />
+  <meta name="twitter:image" content="https://fairsplitbill.netlify.app/og-image.png" />
+  <meta name="twitter:image:alt" content="FairSplit - Fair Bill Splitting Calculator" />
+  <meta name="twitter:creator" content="@fairsplit" />
+
+  <!-- Preconnect to improve performance with priority hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin fetchpriority="high" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin fetchpriority="high" />
+
+  <!-- Font Stylesheets with Priority Hints -->
+  <link rel="stylesheet"
+    href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400,300,100&display=swap"
+    fetchpriority="high" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    fetchpriority="high" />
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "FairSplit",
       "alternateName": "FairSplit Bill Splitter",
-      "url": "https://fairsplit.app",
+      "url": "https://fairsplitbill.netlify.app",
       "description": "Free bill splitting calculator that divides expenses fairly based on what each person consumed. Perfect for restaurants, group dinners, and shared expenses.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
@@ -125,38 +137,38 @@
       "author": {
         "@type": "Organization",
         "name": "FairSplit",
-        "url": "https://fairsplit.app"
+        "url": "https://fairsplitbill.netlify.app"
       }
     }
     </script>
-    
-    <script type="application/ld+json">
+
+  <script type="application/ld+json" nonce="RANDOM_CSP_NONCE">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does FairSplit calculate bill splits?",
+          "name": "How do I split a bill fairly based on who ate what?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "FairSplit divides bills based on what each person actually consumed. You add items with their prices and assign them to specific people. The app automatically calculates how much each person owes based on their consumption."
+            "text": "FairSplit makes this easy. First, add all the people at the table. Then, add each item from the receipt and tap the people who shared that specific item. The app automatically calculates each person's share, including their portion of tax and tip."
           }
         },
         {
           "@type": "Question",
-          "name": "Is FairSplit free to use?",
+          "name": "Can I split shared appetizers or drinks?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, FairSplit is completely free to use. There are no hidden fees, subscriptions, or signup requirements. All features are available to everyone."
+            "text": "Yes! When adding an item, simply select multiple people. The cost will be divided equally among all selected participants for that specific item, making it perfect for shared plates and pitchers."
           }
         },
         {
           "@type": "Question",
-          "name": "What currencies does FairSplit support?",
+          "name": "Is this bill splitter app free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "FairSplit supports 30+ currencies including USD, EUR, GBP, INR, JPY, CNY, CAD, AUD, and many more. You can easily switch between currencies for any bill."
+            "text": "FairSplit is 100% free to use. There are no ads, no paywalls, and no hidden subscriptions. It is a completely free tool built to help groups dine together without the awkward math at the end."
           }
         },
         {
@@ -164,27 +176,43 @@
           "name": "Does FairSplit work offline?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, FairSplit works offline as a Progressive Web App (PWA). Your data is saved locally in your browser, so you can split bills even without an internet connection."
+            "text": "Yes, FairSplit works completely offline as a Progressive Web App (PWA). Your data is saved locally on your device, so you can split bills even in restaurants with bad reception or while traveling abroad without data."
+          }
+        },
+         {
+          "@type": "Question",
+          "name": "What currencies does FairSplit support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FairSplit supports over 30 major global currencies including USD ($), EUR (€), GBP (£), INR (₹), JPY (¥), and many more. You can switch currencies instantly from the top menu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do my friends need to download the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No download is required for your friends. Only one person needs to enter the bill details. Once calculated, you can export a text summary or screenshot to share with the group via WhatsApp, iMessage, or Messenger."
           }
         }
       ]
     }
     </script>
-  </head>
+</head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
-    
-    <!-- Buy Me a Coffee Widget - Low priority, non-critical -->
-    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ritamf91" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BD5FFF" data-position="Right" data-x_margin="18" data-y_margin="18" fetchpriority="low" defer></script>
-    
-    <!-- Fallback for users without JavaScript -->
-    <noscript>
-      <div style="text-align: center; padding: 50px; font-family: sans-serif;">
-        <h1>JavaScript Required</h1>
-        <p>FairSplit requires JavaScript to run. Please enable JavaScript in your browser settings.</p>
-      </div>
-    </noscript>
-  </body>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
+
+
+
+  <!-- Fallback for users without JavaScript -->
+  <noscript>
+    <div style="text-align: center; padding: 50px; font-family: sans-serif;">
+      <h1>JavaScript Required</h1>
+      <p>FairSplit requires JavaScript to run. Please enable JavaScript in your browser settings.</p>
+    </div>
+  </noscript>
+</body>
+
 </html>

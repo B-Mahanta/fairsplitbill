@@ -3,12 +3,12 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://fairsplitbill.netlify.app/</loc>
-    <lastmod>2026-01-11</lastmod>
+    <loc>https://fairsplit.app/</loc>
+    <lastmod>2025-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://fairsplitbill.netlify.app/og-image.png</image:loc>
+      <image:loc>https://fairsplit.app/og-image.png</image:loc>
       <image:title>FairSplit - Fair Bill Splitting Calculator</image:title>
       <image:caption>Free bill splitting calculator for fair expense sharing</image:caption>
     </image:image>

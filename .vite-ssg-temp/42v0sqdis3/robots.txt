@@ -1,5 +1,5 @@
 # FairSplit - Fair Bill Splitting Calculator
-# https://fairsplitbill.netlify.app
+# https://fairsplit.app
 
 User-agent: *
 Allow: /
@@ -41,7 +41,7 @@ User-agent: WhatsApp
 Allow: /
 
 # Sitemap location
-Sitemap: https://fairsplitbill.netlify.app/sitemap.xml
+Sitemap: https://fairsplit.app/sitemap.xml
 
 # Additional resources
-Host: https://fairsplitbill.netlify.app
+Host: https://fairsplit.app

@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
   // SEO-friendly HTML generation
   html: {
     cspNonce: mode === 'production' ? 'RANDOM_CSP_NONCE' : undefined,
@@ -34,7 +35,7 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast'],
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast', 'sonner'],
           'utils': ['date-fns', 'clsx', 'tailwind-merge'],
         },
         // Add priority hints to chunk loading
@@ -50,6 +51,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
+
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
     // Enable source maps for production debugging (optional)

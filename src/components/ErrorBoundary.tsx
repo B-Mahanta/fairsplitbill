@@ -58,13 +58,13 @@ const DefaultErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetError 
           <div className="p-3 rounded-full bg-destructive/10">
             <AlertTriangle className="h-8 w-8 text-destructive" />
           </div>
-          
+
           <div>
             <h2 className="text-xl font-bold text-destructive mb-2">Something went wrong</h2>
             <p className="text-sm text-muted-foreground mb-4">
               We encountered an unexpected error. Don't worry, your data is safe.
             </p>
-            
+
             {error && process.env.NODE_ENV === 'development' && (
               <details className="text-left mb-4">
                 <summary className="text-xs text-muted-foreground cursor-pointer">
@@ -76,15 +76,15 @@ const DefaultErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetError 
               </details>
             )}
           </div>
-          
+
           <div className="flex gap-2 w-full">
             <Button onClick={resetError} className="flex-1">
               <RefreshCw className="h-4 w-4 mr-2" />
               Try Again
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => window.location.reload()} 
+            <Button
+              variant="outline"
+              onClick={() => window.location.reload()}
               className="flex-1"
             >
               Reload Page

@@ -11,7 +11,7 @@ import { sanitizeMonetaryData } from './currency';
  */
 export const cleanAllStorageData = (): void => {
   const keys = ['fairsplit-data', 'fairsplit-backup', 'fairsplit-settings'];
-  
+
   keys.forEach(key => {
     try {
       const data = localStorage.getItem(key);
@@ -36,24 +36,24 @@ export const migrateStorageData = (): void => {
     const data = localStorage.getItem('fairsplit-data');
     if (data) {
       const parsed = JSON.parse(data);
-      
+
       // Check if migration is needed
       if (parsed.version !== '2.0') {
         console.log('Migrating storage data to precision-safe format...');
-        
+
         // Sanitize all monetary values
         const migrated = {
-          ...sanitizeMonetaryData(parsed),
+          ...(sanitizeMonetaryData(parsed) as Record<string, unknown>),
           version: '2.0',
           migratedAt: new Date().toISOString()
         };
-        
+
         // Save migrated data
         localStorage.setItem('fairsplit-data', JSON.stringify(migrated));
-        
+
         // Create backup of original data
         localStorage.setItem('fairsplit-data-backup', data);
-        
+
         console.log('Storage data migration completed successfully');
       }
     }
@@ -66,25 +66,25 @@ export const migrateStorageData = (): void => {
  * Validate monetary data for precision issues
  * Returns true if data has precision issues that need fixing
  */
-export const hasFloatingPointIssues = (data: any): boolean => {
-  const checkValue = (value: any): boolean => {
+export const hasFloatingPointIssues = (data: unknown): boolean => {
+  const checkValue = (value: unknown): boolean => {
     if (typeof value === 'number') {
       // Check if the number has more than 2 decimal places with precision issues
       const rounded = Math.round((value + Number.EPSILON) * 100) / 100;
       return Math.abs(value - rounded) > 0.001;
     }
-    
+
     if (Array.isArray(value)) {
       return value.some(checkValue);
     }
-    
+
     if (value && typeof value === 'object') {
-      return Object.values(value).some(checkValue);
+      return Object.values(value as Record<string, unknown>).some(checkValue);
     }
-    
+
     return false;
   };
-  
+
   return checkValue(data);
 };
 
@@ -93,21 +93,21 @@ export const hasFloatingPointIssues = (data: any): boolean => {
  */
 export const generatePrecisionReport = (): string => {
   const report: string[] = [];
-  
+
   try {
     const data = localStorage.getItem('fairsplit-data');
     if (data) {
       const parsed = JSON.parse(data);
-      
+
       if (hasFloatingPointIssues(parsed)) {
         report.push('❌ Floating-point precision issues detected in stored data');
-        
+
         // Check items specifically
         if (parsed.items && Array.isArray(parsed.items)) {
-          const problematicItems = parsed.items.filter((item: any) => 
+          const problematicItems = parsed.items.filter((item: { price?: unknown }) =>
             hasFloatingPointIssues(item.price)
           );
-          
+
           if (problematicItems.length > 0) {
             report.push(`   - ${problematicItems.length} items with price precision issues`);
           }
@@ -121,7 +121,7 @@ export const generatePrecisionReport = (): string => {
   } catch (error) {
     report.push(`❌ Error analyzing stored data: ${error}`);
   }
-  
+
   return report.join('\n');
 };
 

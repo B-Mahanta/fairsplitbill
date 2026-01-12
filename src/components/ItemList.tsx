@@ -28,9 +28,9 @@ interface ItemListProps {
   formatCurrency: (amount: number) => string;
 }
 
-const EditItemDialog = ({ item, participants, onSave, currency }: { 
-  item: BillItem; 
-  participants: string[]; 
+const EditItemDialog = ({ item, participants, onSave, currency }: {
+  item: BillItem;
+  participants: string[];
   onSave: (updatedItem: Partial<BillItem>) => void;
   currency: { code: string; symbol: string; name: string };
 }) => {
@@ -51,7 +51,7 @@ const EditItemDialog = ({ item, participants, onSave, currency }: {
   const handleSave = () => {
     const updatedAssignedTo = isSharedByAll ? [] : selectedParticipants;
     const updatedParticipantsAtTime = isSharedByAll ? selectedParticipants : item.participantsAtTime;
-    
+
     onSave({
       assignedTo: updatedAssignedTo,
       participantsAtTime: updatedParticipantsAtTime,
@@ -62,14 +62,23 @@ const EditItemDialog = ({ item, participants, onSave, currency }: {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center gap-1"
-        >
-          <Edit2 className="h-4 w-4" />
-          <span className="text-xs hidden sm:inline">Edit</span>
-        </Button>
+        <div className="inline-flex"> {/* Wrapper for TooltipTrigger to work with non-button child if needed, but Button is fine. Actually DialogTrigger expects a child. We need to be careful with nesting. */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center gap-1"
+              >
+                <Edit2 className="h-4 w-4" />
+                <span className="text-xs">Edit</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent align="end">
+              <p>Change participants & split</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
@@ -81,7 +90,7 @@ const EditItemDialog = ({ item, participants, onSave, currency }: {
               <strong>Price:</strong> {currency.symbol}{item.price} • <strong>Paid by:</strong> {item.paidBy}
             </p>
           </div>
-          
+
           <div>
             <Label className="text-sm font-medium text-gray-700">Who consumed this item?</Label>
             <div className="mt-2 space-y-3">
@@ -144,164 +153,100 @@ const EditItemDialog = ({ item, participants, onSave, currency }: {
   );
 };
 
-export const ItemList = ({ items, participants, onRemoveItem, onEditItem, currency, formatCurrency }: ItemListProps) => {
+
+import { memo } from "react";
+
+// ... (other imports remain the same, I will use replace_file_content carefully or just rewrite the export line)
+
+export const ItemList = memo(({ items, participants, onRemoveItem, onEditItem, currency, formatCurrency }: ItemListProps) => {
   // Calculate total using precise sum
   const totalAmount = sumAmounts(items.map(item => item.price));
-  const [showEditHint, setShowEditHint] = useState(() => {
-    // Show hint if user has items but hasn't seen the hint before
-    return items.length > 0 && !localStorage.getItem('fairsplit-edit-hint-seen');
-  });
 
-  const isActive = items.length > 0;
-
+  // ... rest of component
   return (
-    <Card className={`p-4 sm:p-6 bg-white border-2 shadow-sm transition-all duration-300 ${
-      isActive 
-        ? 'border-gray-200 hover:border-gray-300' 
-        : 'border-gray-200 opacity-60'
-    }`}>
-      <div className="flex items-center gap-2.5 mb-5">
-        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md transition-all duration-300 ${
-          isActive 
-            ? 'bg-gradient-to-br from-primary to-purple-600' 
-            : 'bg-gray-400'
-        }`}>
-          <Receipt className="h-4 w-4 text-white" />
+    // ... JSX
+    <div className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden animate-fade-in" aria-label="Bill Items List">
+      <div className="p-6 border-b border-border/50 flex justify-between items-center bg-neutral-50/30">
+        <div>
+          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">Items</h2>
         </div>
-        <div className="flex-1">
-          <h2 className={`text-base font-bold transition-colors duration-300 ${
-            isActive ? 'text-primary' : 'text-gray-900'
-          }`}>Bill Items</h2>
-          <p className="text-xs text-gray-600">
-            {items.length === 0 ? "No items added yet" : `${items.length} items • Total: ${formatCurrency(totalAmount)}`}
-          </p>
-          {items.length > 0 && (
-            <div className="flex items-center gap-2 mt-1">
-              <Info className="h-3 w-3 text-blue-500" />
-              <p className="text-xs text-blue-600">
-                💡 Click the edit icon to change who consumed each item
-              </p>
-            </div>
-          )}
+        <div>
+          {items.length > 0 && <span className="text-sm font-medium text-muted-foreground">{items.length} items</span>}
         </div>
       </div>
 
       {items.length === 0 ? (
-        <div className="text-center py-8 border-2 border-dashed border-gray-200 rounded-lg">
-          <ShoppingCart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-          <p className="text-gray-500 font-medium">No items added yet</p>
-          <p className="text-sm text-gray-400">Start adding items to split the bill fairly</p>
+        <div className="text-center py-12 px-6">
+          <Receipt className="h-8 w-8 text-neutral-300 mx-auto mb-3" />
+          <p className="text-sm text-neutral-900 font-medium">No items yet</p>
+          <p className="text-xs text-muted-foreground max-w-xs mx-auto mt-1">
+            Added items will appear here.
+          </p>
         </div>
       ) : (
-        <div className="space-y-3">
-          {/* First-time user hint */}
-          {showEditHint && items.length > 0 && (
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Edit2 className="h-4 w-4 text-blue-600" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-medium text-blue-900 mb-1">💡 Pro Tip: Edit Items</h4>
-                  <p className="text-sm text-blue-700 mb-2">
-                    Click the "Edit" button on any item to change who consumed it. Perfect for when someone joins late or didn't have certain items!
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => {
-                      setShowEditHint(false);
-                      localStorage.setItem('fairsplit-edit-hint-seen', 'true');
-                    }}
-                    className="text-blue-600 hover:text-blue-700 text-xs p-0 h-auto"
-                  >
-                    Got it, don't show again
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-          
+        <div className="divide-y divide-border/50">
           {items.map((item, index) => {
-            // Use participantsAtTime for correct count when shared by everyone
             const assignedTo = item.assignedTo.length === 0 ? item.participantsAtTime : item.assignedTo;
             const assignedCount = assignedTo.length;
-            // Calculate share per person using precise division
             const dividedAmounts = assignedCount > 0 ? divideAmount(item.price, assignedCount) : [0];
             const sharePerPerson = dividedAmounts.length > 0 ? dividedAmounts[0] : 0;
-            const isFirstItem = index === 0;
 
             return (
-              <div key={item.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-medium text-gray-900">{item.name}</h3>
-                      <span className="text-lg font-bold text-primary">
-                        {formatCurrency(item.price)}
-                      </span>
-                    </div>
-                    
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <div className="flex items-center gap-2">
-                        <User className="h-3 w-3" />
-                        <span>Paid by: {item.paidBy}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {item.assignedTo.length === 0 || item.assignedTo.length > 1 ? (
-                          <Users className="h-3 w-3" />
-                        ) : (
-                          <User className="h-3 w-3" />
-                        )}
-                        <span>
-                          Shared with: {item.assignedTo.length === 0 ? `Everyone (${item.participantsAtTime.join(", ")})` : item.assignedTo.join(", ")}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <DollarSign className="h-3 w-3" />
-                        <span>Per person: {formatCurrency(sharePerPerson)}</span>
-                      </div>
-                    </div>
+              <div key={item.id} className="group p-4 hover:bg-neutral-50/50 transition-colors flex items-start gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-medium text-neutral-900 truncate pr-2">{item.name}</h3>
+                    <span className="font-mono font-medium text-neutral-900">
+                      {formatCurrency(item.price)}
+                    </span>
                   </div>
 
-                  <div className="flex gap-1">
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className={isFirstItem && showEditHint ? "animate-pulse" : ""}>
-                          <EditItemDialog
-                            item={item}
-                            participants={participants}
-                            onSave={(updatedItem) => onEditItem(item.id, updatedItem)}
-                            currency={currency}
-                          />
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Change who consumed this item</p>
-                      </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => onRemoveItem(item.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Delete this item</p>
-                      </TooltipContent>
-                    </Tooltip>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs uppercase tracking-wider text-muted-foreground/70">Paid by</span>
+                      <span className="font-medium text-neutral-700">{item.paidBy}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs uppercase tracking-wider text-muted-foreground/70">For</span>
+                      <span className="font-medium text-neutral-700">
+                        {item.assignedTo.length === 0 ? "Everyone" : (
+                          item.assignedTo.length > 3 ? `${item.assignedTo.length} people` : item.assignedTo.join(", ")
+                        )}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
+                      <span className="text-xs uppercase tracking-wider text-muted-foreground/70">Split</span>
+                      <span className="font-mono text-neutral-700">{formatCurrency(sharePerPerson)}/ea</span>
+                    </div>
                   </div>
+                </div>
+
+                <div className="flex gap-1 self-center">
+                  <EditItemDialog
+                    item={item}
+                    participants={participants}
+                    onSave={(updatedItem) => onEditItem(item.id, updatedItem)}
+                    currency={currency}
+                  />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => onRemoveItem(item.id)}
+                    className="h-8 w-8 text-neutral-400 hover:text-destructive hover:bg-destructive/10"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             );
           })}
+
+          <div className="p-4 bg-neutral-50/50 flex justify-between items-center">
+            <span className="text-sm font-medium text-muted-foreground">Total</span>
+            <span className="font-mono font-bold text-lg text-primary">{formatCurrency(totalAmount)}</span>
+          </div>
         </div>
       )}
-    </Card>
+    </div >
   );
-};
+});

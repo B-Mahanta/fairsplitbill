@@ -7,19 +7,22 @@
   "background_color": "#ffffff",
   "theme_color": "#6460F4",
   "orientation": "portrait-primary",
-  "categories": [
-    "finance",
-    "utilities",
-    "productivity"
-  ],
+  "categories": ["finance", "utilities", "productivity"],
   "lang": "en",
   "dir": "ltr",
-  "icons": [
+  "icons": [],
+  "screenshots": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ],
   "shortcuts": [
