@@ -1,47 +1,6 @@
-# FairSplit - Fair Bill Splitting Calculator
-# https://fairsplitbill.netlify.app
-
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /*.json$
 
-# Specific bot rules
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-Crawl-delay: 2
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-# Sitemap location
 Sitemap: https://fairsplitbill.netlify.app/sitemap.xml
-
-# Additional resources
-Host: https://fairsplitbill.netlify.app

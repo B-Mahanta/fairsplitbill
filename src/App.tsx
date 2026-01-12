@@ -17,12 +17,10 @@ export function App() {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>

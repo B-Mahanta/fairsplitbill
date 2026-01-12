@@ -33,11 +33,11 @@ export default defineConfig(({ mode }) => ({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast', 'sonner'],
-          'utils': ['date-fns', 'clsx', 'tailwind-merge'],
-        },
+        // manualChunks: {
+        //   'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        //   'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast', 'sonner'],
+        //   'utils': ['date-fns', 'clsx', 'tailwind-merge'],
+        // },
         // Add priority hints to chunk loading
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.');
